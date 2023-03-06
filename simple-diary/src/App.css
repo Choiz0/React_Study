@@ -1,0 +1,42 @@
+.DiaryEditor{
+ 
+  border: 1px solid black;
+  margin: 10px auto;
+  text-align: center;
+  width: 70%;
+}
+.DiaryEditor input, textarea{
+  width: 300px;
+  padding:10px;
+  margin: 10px 0;
+ 
+}
+.DiaryEditor textarea{
+  height: 200px;
+}
+.DiaryEditor select{
+  width: 300px;
+  padding: 5px;
+
+}
+.DiaryEditor button{
+  width: 200px;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* diaryList */
+.diaryList{
+
+  width: 70%;
+  margin: 10px auto;
+
+  
+}
+.diarycard{
+  border: 1px solid black;;
+  margin: 10px ;
+  padding: 10px ;
+  background-color: lightgray;
+}
