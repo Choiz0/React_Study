@@ -1,35 +1,41 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect, useContext } from "react";
+import { DiaryDispatchContext } from "../App";
 
-const DiaryItem = ({ item, onDelete, onEdit }) => {
+const DiaryItem = ({ id, author, content, feeling, date }) => {
+
+
+  const {onDelete, onEdit} = useContext(DiaryDispatchContext)
   const contentRef = useRef();
   const [isEdit, setIsEdit] = useState(false);
   const toggleEdit = () => setIsEdit(!isEdit);
-  const [editContent, setEditContent] = useState(item.content);
+  const [editContent, setEditContent] = useState(content);
 
   const handleRemove = () => {
-    if (window.confirm(`Are you sure you want to delete ${item.id} item?`)) {
-      onDelete(item.id);
+    if (window.confirm(`Are you sure you want to delete ${id} item?`)) {
+      onDelete(id);
     }
   };
-
+  useEffect(()=>{
+    console.log(`${id} render`)
+  })
   const handleEdit = () => {
     if (editContent.length < 5) {
       return contentRef.current.focus();
     }
-    if (window.confirm(`Are you sure you want to edit ${item.id} item?`)) {
-      onEdit(item.id, editContent);
+    if (window.confirm(`Are you sure you want to edit ${id} item?`)) {
+      onEdit(id, editContent);
       toggleEdit();
     }
   };
   const handleCancel = () => {
     toggleEdit();
-    setEditContent(item.content);
+    setEditContent(content);
   };
 
   return (
     <div className="diarycard">
-      <p>Author : {item.author}</p>
-      <p>{item.date}</p>
+      <p>Author : {author}</p>
+      <p>{date}</p>
       <hr />
 
       {isEdit ? (
@@ -43,11 +49,11 @@ const DiaryItem = ({ item, onDelete, onEdit }) => {
         </>
       ) : (
         <>
-          <p> {item.content}</p>
+          <p> {content}</p>
         </>
       )}
 
-      <p>Feeling : {item.feeling}</p>
+      <p>Feeling : {feeling}</p>
       <div>
         {isEdit ? (
           <>
@@ -65,4 +71,4 @@ const DiaryItem = ({ item, onDelete, onEdit }) => {
   );
 };
 
-export default DiaryItem;
+export default React.memo(DiaryItem);

@@ -1,11 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState ,useContext} from "react";
+import { DiaryDispatchContext } from "../App";
 
-const DiaryEditor = ({onCreate}) => {
+const DiaryEditor = () => {
+
+  const { onCreate } = useContext(DiaryDispatchContext);
   const [state, setState] = useState({
     author: "",
     content: "",
     feeling: "1",
   });
+
   const authorRef = useRef();
   const contentRef = useRef();
 
@@ -19,18 +23,19 @@ const DiaryEditor = ({onCreate}) => {
   const handleClick = () => {
     if (state.author.length < 3) {
       return authorRef.current.focus();
-    } if (state.content.length < 5) {
+    }
+    if (state.content.length < 5) {
       return contentRef.current.focus();
-    } 
-    onCreate(state.author, state.content, state.feeling);
-    setState({
+    }
+    setState(prevState => ({
+      ...prevState,
       author: "",
       content: "",
       feeling: "1",
-    })
-      // console.log(state);
-    
+    }));
+    onCreate(state.author, state.content, state.feeling);
   };
+
   return (
     <div className="DiaryEditor">
       <h2>Diary</h2>
@@ -55,11 +60,11 @@ const DiaryEditor = ({onCreate}) => {
       <div>
         <label>Feeling</label>{" "}
         <select name="feeling" value={state.feeling} onChange={handleState}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
         </select>
       </div>
       <div>
@@ -69,4 +74,4 @@ const DiaryEditor = ({onCreate}) => {
   );
 };
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
