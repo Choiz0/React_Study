@@ -1,12 +1,11 @@
-import React, { useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
-import MyButton from "./components/MyButton";
-import MyHeader from "./components/MyHeader";
+
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
@@ -15,7 +14,7 @@ const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
     case "INIT": {
-      return (newState = [action.data]);
+      return action.data;
     }
     case "CREATE": {
       newState = [action.data, ...state];
@@ -27,56 +26,36 @@ const reducer = (state, action) => {
     }
     case "EDIT": {
       newState = state.map((it) =>
-        it.id === action.targetId ? { ...action.data } : it
+        it.id === action.data.id ? { ...action.data } : it
       );
       break;
     }
     default:
       return state;
   }
-
+  localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
 
-const dummy = [
-  {id:1,
-   emotion:1,
-   content: "diary 1",
-   date:1678208306875
-  },
-  {id:2,
-    emotion:2,
-    content: "diary 2",
-    date:1678208306876
-   },
-   {id:3,
-    emotion:3,
-    content: "diary 3",
-    date:1678208306877
-   },
-
-   {id:4,
-    emotion:4,
-    content: "diary 4",
-    date:1678208306878
-   },
-   {id:5,
-    emotion:5,
-    content: "diary 5",
-    date:1678208306879
-   },
-   {id:6,
-    emotion:5,
-    content: "diary 6",
-    date:1778208306879
-   },
-]
-
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummy);
-  const dataId = useRef(0);
+  const [data, dispatch] = useReducer(reducer, []);
+ 
+  useEffect(()=>{
+    const localData = localStorage.getItem('diary');
+    if(localData){
+      const diaryList = JSON.parse(localData).sort((a,b)=>parseInt(b.id)-parseInt(a.id));
+    
 
+      if(diaryList.length >=1){
+        dataId.current = parseInt(diaryList[0].id) +1;
+        dispatch({type:"INIT" , data:diaryList })
+      }
+   
+  
+    }
+  },[])
+  const dataId = useRef(6);
   //Create
   const onCreate = (date, content, emotion) => {
     dispatch({
@@ -117,7 +96,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
               <Route path="/diary/:id" element={<Diary />} />
-              <Route path="/edit" element={<Edit />} />
+              <Route path="/edit/:id" element={<Edit />} />
             </Routes>
           </div>
         </BrowserRouter>

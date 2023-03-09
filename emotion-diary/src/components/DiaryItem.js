@@ -11,7 +11,7 @@ const DiaryItem = ({id,emotion,content,date}) => {
   return (
     <div className='DiaryItem'>
     <div className="emotion_img_wrapper" onClick={goDetail}>
-        <img src={process.env.PUBLIC_URL + `assets/emotion${emotion}.png`}/>
+        <img src={process.env.PUBLIC_URL + `assets/emotion${emotion}.png`} alt={emotion.discript}/>
     </div>
     <div className="info_wrapper" onClick={goDetail}>
         <div className="diary_date">{strDate}</div>
@@ -24,4 +24,4 @@ const DiaryItem = ({id,emotion,content,date}) => {
   )
 }
 
-export default DiaryItem
+export default React.memo(DiaryItem)
