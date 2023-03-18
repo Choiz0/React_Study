@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import GameOver from './GameOver';
 
 const Alphabet = [
   "A",
@@ -30,27 +31,19 @@ const Alphabet = [
 ];
 
 type KeyCalProps = {
-  guessLetter: string[];
-  setGusssLetter: React.Dispatch<React.SetStateAction<string[]>>;
+ 
   word: string;
-  correctLetter: string[];
-  setCorrectLetter: React.Dispatch<React.SetStateAction<string[]>>;
-  gameOver: boolean;
-  setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   setIncorrectNum: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const KeyCal = ({
-  guessLetter,
-  setGusssLetter,
   word,
-  correctLetter,
-  setCorrectLetter,
-  gameOver,
-  setGameOver,
   setIncorrectNum,
 }: KeyCalProps) => {
+  const [guessLetter, setGuessLetter] = useState<string[]>([]);
+  const [correctLetter, setCorrectLetter] = useState<string[]>([]);
   const answer = word.toUpperCase().split("");
+  const [gameOver, setGameOver] = useState<boolean>(false);
   const [spell, setSpell] = useState<string>("");
 
   console.log(answer);
@@ -59,12 +52,12 @@ const KeyCal = ({
     const button: HTMLButtonElement = event.currentTarget;
 
     setSpell(button.name);
-    setGusssLetter((prevGuesses) => [...prevGuesses, button.name]);
+    setGuessLetter((prevGuesses) => [...prevGuesses, button.name]);
    
 
   };
 
-  //console.log(guessLetter)
+
   useEffect(() => {
     const incorrectNum = guessLetter.filter((letter) => !answer.includes(letter)).length;
   setIncorrectNum(incorrectNum ===0?1 : incorrectNum+1);
@@ -110,14 +103,14 @@ const KeyCal = ({
               style={{
                 fontSize: "3rem",
                 fontWeight: "800",
-                color: "blue",
+                color: "#646cff",
                 visibility: correctLetter.includes(item) ? "visible" : "hidden",
               }}
             >
               {item}
             </span>
             <span
-              style={{ borderBottom: "5px solid blue ", minWidth: "40px" }}
+              style={{ borderBottom: "5px solid  #646cff ", minWidth: "40px" }}
             ></span>
           </div>
         ))}
@@ -136,6 +129,7 @@ const KeyCal = ({
           </button>
         );
       })}
+      <GameOver word={word} gameOver={gameOver} correctLetter={correctLetter}/>
     </div>
   
   );
