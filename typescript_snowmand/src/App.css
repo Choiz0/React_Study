@@ -1,13 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  max-height: 100vh;
-}
+body{
+  margin: 0;
 
+
+}
 .inactive{
-  background-color: blue;
+  background-color: #646cff;
+  color: white !important;
+
  
 }
 
@@ -18,4 +17,30 @@
  
  }
 
- 
+ .snowApp{
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  max-height: 100vh;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color:#646cff;
+
+}
+
+ .snowApp button{
+
+
+    border-radius: 8px;
+    border: 1px solid #646cff;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    color:#646cff;
+    font-weight: 800;
+
+  
+
+ }
