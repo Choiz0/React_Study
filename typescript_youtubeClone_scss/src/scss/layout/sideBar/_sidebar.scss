@@ -1,0 +1,18 @@
+@use "../../abstracts/" as *;
+
+.sidebar{
+   grid-area: aside;
+    height: calc(100vh - 55px);
+    background-color: $bg-color;
+    color:$text-color;
+    font-family: "Roboto";
+    font-size:14px ;
+    font-weight: 500;
+    padding: 12px ;
+   
+   
+  
+}
+.hide{
+    display: none;
+}

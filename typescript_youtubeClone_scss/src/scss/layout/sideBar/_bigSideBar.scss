@@ -1,0 +1,47 @@
+@use "../../abstracts" as *;
+.bigSideBar {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  
+
+  .lisbox {
+    width: 180px;
+    @include center;
+    border-bottom: 1px solid red;
+   
+  }
+    .listItem {
+    
+      flex-direction:row;
+      height: 40px;
+      display: flex;
+      padding: 0 12px;
+      cursor: pointer;
+      &:hover {
+        border-radius: 10px;
+        background-color: #303030 !important;
+      }
+      .sidebarIconBox{
+        width: 24px;
+   
+        margin-right: 24px;
+        @include center;
+    }
+      .sideBarlist_name {
+        @include center;
+      }
+    }
+    .active {
+      border-radius: 10px;
+      background-color: #303030 !important;
+    }
+    .borderLine{
+        border-top: 0.5px solid rgba(255,255,255,0.2);
+        margin-left:-12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+       
+    }
+  }
+

@@ -1,0 +1,20 @@
+@use "../../abstracts" as *;
+
+.rightNav {
+  width: 136px;
+  @include center;
+  gap: 8px;
+  color: $text-color;
+  .rightNavIcon {
+    height: 40px;
+    cursor: pointer;
+    @include center;
+    &:hover {
+      background-color: $bg-color-hover;
+      border-radius: 50%;
+    }
+  }
+}
+.smallRightnav {
+  display: none;
+}

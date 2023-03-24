@@ -1,0 +1,31 @@
+@use "abstracts" as *;
+@use "layout" ;
+@use "pages" ;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+
+
+* {
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+
+}
+body {
+  background-color: $bg-color;
+  font-family: "Roboto", sans-serif;
+  min-width: 555px;
+
+  #root {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 55px auto;
+    grid-template-areas:
+      "nav nav"
+      "aside main";
+    main {
+     
+      grid-area: main;
+    
+    }
+  }
+}

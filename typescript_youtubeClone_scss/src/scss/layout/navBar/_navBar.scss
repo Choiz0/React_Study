@@ -1,0 +1,21 @@
+@use "../../abstracts" as *;
+
+.NavigationBar {
+  grid-area: nav;
+  padding: 0 16px;
+  width: 100vw;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  justify-content: space-between;
+}
+.smallscreenNav {
+  padding: 0 8px;
+  justify-content: start;
+  width: 100vw;
+}
+.showSearchNav {
+  justify-content: start;
+  width: 100vw;
+}
